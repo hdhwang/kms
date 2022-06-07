@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export DJANGO_SETTINGS_MODULE="config.settings.production"
 SCRIPT_PATH=$(dirname $(realpath $0))
 pid_file=$SCRIPT_PATH"/tmp/kms.pid"
 
