@@ -1,0 +1,158 @@
+{% extends 'kms/base/base.html' %}
+{% load static %}
+
+{% block link %}
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/jquery-ui/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block acl_menu %}menu-is-opening menu-open{% endblock %}
+{% block acl_link %}active{% endblock %}
+{% block acl_ip_addr %}active{% endblock %}
+
+{% block page-title %}IP 접근 제어{% endblock %}
+{% block page-path %}
+    <li class="breadcrumb-item">API 접근 제어</li>
+    <li class="breadcrumb-item active">IP 접근 제어</li>
+{% endblock %}
+
+<!-- Main content -->
+{% block content %}
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-body">
+            <table id="table-data" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>번호</th>
+                    <th>IP 주소</th>
+                    <th>설명</th>
+                </tr>
+                </thead>
+
+                <!-- 필터 항목 -->
+                <tfoot id="table-foot">
+                <tr>
+                    <th data-column="0"></th>                       <!-- 체크 박스 -->
+                    <th data-column="1"></th>                       <!-- 번호 -->
+                    <th data-column="2"><input type="text"></th>    <!-- IP 주소 -->
+                    <th data-column="3"><input type="text"></th>    <!-- 설명 -->
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+    <!-- IP 주소 추가 -->
+    <div class="modal fade" id="menu-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-title">IP 주소 추가</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group row">
+                                <label for="ip" class="col-sm-3 control-label">IP 주소<span class="text-red">*</span></label>
+
+                                <div class="col-sm-6">
+                                    <input hidden="hidden" />
+                                    <input type="text" id="ip" name="ip" class="form-control" data-inputmask="'alias': 'ip'" data-mask>
+                                </div>
+
+                                <div class="control-label" style="margin-left:-1%">
+                                    /
+                                </div>
+
+                                <div class="col-sm-3" style="margin-left:-1%">
+                                    <select name="cidr" id="cidr" class="form-control">
+                                        <option value="32">32</option>
+                                        <option value="31">31</option>
+                                        <option value="30">30</option>
+                                        <option value="29">29</option>
+                                        <option value="28">28</option>
+                                        <option value="27">27</option>
+                                        <option value="26">26</option>
+                                        <option value="25">25</option>
+                                        <option value="24">24</option>
+                                        <option value="23">23</option>
+                                        <option value="22">22</option>
+                                        <option value="21">21</option>
+                                        <option value="20">20</option>
+                                        <option value="19">19</option>
+                                        <option value="18">18</option>
+                                        <option value="17">17</option>
+                                        <option value="16">16</option>
+                                        <option value="15">15</option>
+                                        <option value="14">14</option>
+                                        <option value="13">13</option>
+                                        <option value="12">12</option>
+                                        <option value="11">11</option>
+                                        <option value="10">10</option>
+                                        <option value="9">9</option>
+                                        <option value="8">8</option>
+                                        <option value="7">7</option>
+                                        <option value="6">6</option>
+                                        <option value="5">5</option>
+                                        <option value="4">4</option>
+                                        <option value="3">3</option>
+                                        <option value="2">2</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="comment" class="col-sm-3 control-label">설명<span class="text-red">*</span></label>
+
+                                <div class="col-sm-9">
+                                    <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" id="btn-reset">초기화</button>
+                    <button type="button" class="btn btn-primary" id="btn-ok">추가</button>
+                    <button type="button" class="btn btn-default pull-right" id="btn-cancel" data-dismiss="modal">취소</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- IP 주소 추가 -->
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'kms/acl/ip_addr.js' %}"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- InputMask -->
+    <script src="{% static '/plugins/inputmask/jquery.inputmask.js' %}"></script>
+{% endblock %}

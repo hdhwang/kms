@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+</head>
+
+<body class="hold-transition login-page">
+    <div class="error-page login-box">
+        <h2 class="headline {%  block error_code_color %}text-warning{% endblock %}" style="font-size:130px;margin-right: 5%;">{% block error_code %}{% endblock %}</h2>
+        <div class="error-content">
+            <br/>
+            <h3 style="font-size:35px"><i class="fas fa-exclamation-triangle {% block icon_color %}text-warning{% endblock %}"></i>{% block message %}{% endblock %}</h3>
+
+            <p>
+                {% block sub_message %}{% endblock %}
+                <br/>
+                <a href="{% url 'index' %}">메인 페이지로 돌아가기</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

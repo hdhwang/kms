@@ -1,0 +1,60 @@
+{% extends 'kms/base/base.html' %}
+{% load static %}
+
+{% block link %}
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/jquery-ui/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block keyinfo_settings %}active{% endblock %}
+
+{% block page-title %}시스템 설정{% endblock %}
+{% block page-path %}
+    <li class="breadcrumb-item active">시스템 설정</li>
+{% endblock %}
+
+{% block content %}
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-body">
+            <table id="table-data" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                <tr>
+                    <th>설정</th>
+                    <th>활성화</th>
+                </tr>
+                </thead>
+            </table>
+            <br>
+            <div>
+                <button type="button" class="btn btn-primary float-right" id="btn-ok">저장</button>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'kms/keyinfo/settings.js' %}"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- Bootstrap Switch -->
+    <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
+{% endblock %}

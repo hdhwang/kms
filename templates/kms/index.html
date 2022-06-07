@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KMS</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+</head>
+
+<body class="hold-transition login-page">
+<div class="login-box" id="main-contents">
+    <!-- /.login-logo -->
+    <div class="card card-outline">
+        <div class="card-header text-center">
+            <a href="{% url 'index' %}" class="h1"><b>KMS</b></a>
+        </div>
+        <div class="card-body">
+            <form>
+                {% csrf_token %}
+                <input type="hidden" id="next" name="next" value="{{ request.GET.next }}"/>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="user-id" maxlength="15" name="{{ form.username.html_name }}" type="text" placeholder="아이디">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="user-password" maxlength="120" name="{{ form.password.html_name }}" type="password" placeholder="비밀번호">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="id-save-check">
+                            <label for="id-save-check">
+                                아이디 저장
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="button" id="login-btn" class="btn btn-primary btn-block">로그인</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+
+<!-- iCheck 1.0.3 -->
+<script src="{% static 'plugins/icheck/icheck.min.js' %}"></script>
+
+<!-- axios -->
+<script src="{% static 'plugins/axios/axios.min.js' %}"></script>
+
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+<!-- base.js -->
+<script src="{% static 'kms/base/base.js' %}"></script>
+
+<!-- index.js -->
+<script src="{% static 'kms/index.js' %}"></script>
+
+</body>
+</html>

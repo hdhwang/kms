@@ -1,0 +1,21 @@
+{
+  "kms" : {
+    "SECRET_KEY": "Input your Django Project Secret Key",
+    "ALLOWED_HOSTS": [
+      "localhost",
+      "127.0.0.1"
+    ],
+    "DATABASES": {
+      "default": {
+        "ENGINE": "django.db.backends.XXX(mysql, oracle, postgresql, sqlite3)",
+        "NAME": "database name",
+        "USER": "user",
+        "PASSWORD": "password",
+        "HOST": "host",
+        "PORT": "port"
+      }
+    },
+    "AES_KEY": "Input your AES KEY",
+    "AES_KEY_IV": "Input your AES IV"
+  }
+}

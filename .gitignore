@@ -1,0 +1,16 @@
+# PyCharm, Virtual Environment files #
+/.idea
+/venv
+/.vscode
+
+# Django files #
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+ # OS generated files #
+ .DS_Store*
+
+ # Secret information files #
+config/settings/server_info.json

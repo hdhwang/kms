@@ -1,0 +1,7 @@
+{% extends 'kms/base/error_base.html' %}
+{% load static %}
+
+{% block title %}401 Unauthorized{% endblock %}
+{% block error_code %}401{% endblock %}
+{% block message %}접근 권한이 없습니다.{% endblock %}
+{% block sub_message %}{{ message }}{% endblock %}

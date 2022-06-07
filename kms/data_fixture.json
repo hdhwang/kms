@@ -1,0 +1,56 @@
+[
+    {
+        "model": "kms.settings",
+        "pk": 1,
+        "fields": {
+            "key": "REQ_PW_KEYINFO_VALUE",
+            "value": "Y",
+            "description": "키 상세 조회 시 패스워드 입력 요구"
+        }
+    },
+    {
+        "model": "kms.settings",
+        "pk": 2,
+        "fields": {
+            "key": "REQ_PW_KEYINFO_DELETE",
+            "value": "Y",
+            "description": "키 삭제 시 패스워드 입력 요구"
+        }
+    },
+    {
+        "model": "kms.settings",
+        "pk": 3,
+        "fields": {
+            "key": "ENABLE_GET_API",
+            "value": "Y",
+            "description": "조회 API 기능 활성화"
+        }
+    },
+    {
+        "model": "kms.settings",
+        "pk": 4,
+        "fields": {
+            "key": "ENABLE_POST_API",
+            "value": "Y",
+            "description": "추가 API 기능 활성화"
+        }
+    },
+    {
+        "model": "kms.settings",
+        "pk": 5,
+        "fields": {
+            "key": "ENABLE_PUT_API",
+            "value": "Y",
+            "description": "편집 API 기능 활성화"
+        }
+    },
+    {
+        "model": "kms.settings",
+        "pk": 6,
+        "fields": {
+            "key": "ENABLE_DELETE_API",
+            "value": "Y",
+            "description": "삭제 API 기능 활성화"
+        }
+    }
+]

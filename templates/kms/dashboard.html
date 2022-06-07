@@ -1,0 +1,41 @@
+{% extends 'kms/base/base.html' %}
+{% load static %}
+
+{% block link %}
+{% endblock %}
+
+{% block dashboard %}active{% endblock %}
+
+{% block page-title %}대시보드{% endblock %}
+{% block page-path %}
+    <li class="breadcrumb-item active">대시보드</li>
+{% endblock %}
+
+{% block content %}
+    <div id="dashboard" class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+                <!-- Loading (remove the following to stop the loading)-->
+                <div class="overlay">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </div>
+
+                <div class="inner">
+                    <h2 id="keyinfo">
+                        Loading...
+                    </h2>
+                    <p>키 수</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-key"></i>
+                </div>
+                <a href="{% url 'keyinfo' %}" class="small-box-footer">상세 보기 <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'kms/dashboard.js' %}"></script>
+{% endblock %}
