@@ -5,12 +5,13 @@ from kms.util.dicHelper import insert_dic_data
 from kms.util.formatHelper import *
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
 # 대시보드
 class DashboardView(TemplateView):
-    template_name = 'kms/dashboard.html'
+    template_name = "kms/dashboard.html"
     context = {}
 
     def get(self, request, *args, **kwargs):
@@ -25,10 +26,12 @@ class DashboardAPI(View):
 
             # 요청 사용자가 관리자가 아닌 경우 WHERE 절에 사용자 ID 추가
             if request.user.is_superuser == 0:
-                insert_dic_data(filter_params, 'user_id', request.user.id)
+                insert_dic_data(filter_params, "user_id", request.user.id)
 
-            return JsonResponse({'count': models.Keyinfo.objects.filter(**filter_params).count()})
+            return JsonResponse(
+                {"count": models.Keyinfo.objects.filter(**filter_params).count()}
+            )
 
         except Exception as e:
-            logger.warning(f'[DashboardAPI - get] {to_str(e)}')
+            logger.warning(f"[DashboardAPI - get] {to_str(e)}")
             return HttpResponse(status=400)

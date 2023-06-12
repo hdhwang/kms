@@ -2,28 +2,29 @@ from datetime import datetime, timezone
 
 import ipaddress
 import logging
+
 logger = logging.getLogger(__name__)
 
 
-def datetime_to_str(param, date_format='%Y-%m-%d %H:%M'):
+def datetime_to_str(param, date_format="%Y-%m-%d %H:%M"):
     result = param
     try:
         result = param.strftime(date_format)
 
     except Exception as e:
-        logger.warning(f'[datetime_to_str] {to_str(e)}')
+        logger.warning(f"[datetime_to_str] {to_str(e)}")
 
     finally:
         return result
 
 
-def str_to_datetime(param, date_format='%Y-%m-%d %H:%M:%S'):
+def str_to_datetime(param, date_format="%Y-%m-%d %H:%M:%S"):
     result = param
     try:
         result = datetime.strptime(param, date_format)
 
     except Exception as e:
-        logger.warning(f'[str_to_datetime] {to_str(e)}')
+        logger.warning(f"[str_to_datetime] {to_str(e)}")
 
     finally:
         return result
@@ -35,7 +36,7 @@ def to_int(param):
         result = int(param)
 
     except Exception as e:
-        logger.warning(f'[to_int] {to_str(e)}')
+        logger.warning(f"[to_int] {to_str(e)}")
 
     finally:
         return result
@@ -47,7 +48,7 @@ def to_str(param):
         result = str(param)
 
     except Exception as e:
-        logger.warning(f'[to_str] {str(e)}')
+        logger.warning(f"[to_str] {str(e)}")
 
     finally:
         return result
@@ -63,10 +64,10 @@ def split_email_domain(data_list):
 
     try:
         for data in data_list:
-            result.append(data.split('@')[0])
+            result.append(data.split("@")[0])
 
     except Exception as e:
-        logger.warning(f'[split_email_domain] {to_str(e)}')
+        logger.warning(f"[split_email_domain] {to_str(e)}")
 
     finally:
         return result
@@ -79,7 +80,7 @@ def int_to_ip(input_ip):
         ip_addr = to_str(ipaddress.IPv4Address(ip_addr))
 
     except Exception as e:
-        logger.warning(f'[int_to_ip] {to_str(e)}')
+        logger.warning(f"[int_to_ip] {to_str(e)}")
 
     finally:
         return ip_addr
@@ -92,7 +93,7 @@ def ip_to_int(input_ip):
         ip_addr = to_int(ipaddress.IPv4Address(ip_addr))
 
     except Exception as e:
-        logger.warning(f'[ip_to_int] {to_str(e)}')
+        logger.warning(f"[ip_to_int] {to_str(e)}")
 
     finally:
         return ip_addr
@@ -101,10 +102,10 @@ def ip_to_int(input_ip):
 def list_to_str(param):
     result = param
     try:
-        result = ','.join(param)
+        result = ",".join(param)
 
     except Exception as e:
-        logger.warning(f'[list_to_str] {str(e)}')
+        logger.warning(f"[list_to_str] {str(e)}")
 
     finally:
         return result
