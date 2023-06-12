@@ -3,15 +3,18 @@ from django.contrib.auth.models import User
 from kms.util.formatHelper import *
 from kms.util.networkHelper import get_client_ip
 import logging
+
 logger = logging.getLogger(__name__)
 
 
-def insert_audit_log(user_id, request, category, sub_category, action, result):
+def insert_audit_log(user, request, category, sub_category, action, result):
+    log_result = False
     try:
-        log_result = False
-
-        user = User.objects.get(pk=user_id) if user_id is not None else None
-        ip_int = ip_to_int(get_client_ip(request)) if type(ip_to_int(get_client_ip(request))) is int else None
+        ip_int = (
+            ip_to_int(get_client_ip(request))
+            if type(ip_to_int(get_client_ip(request))) is int
+            else None
+        )
 
         audit_log_data = models.AuditLog(
             user=user,
@@ -25,7 +28,7 @@ def insert_audit_log(user_id, request, category, sub_category, action, result):
         log_result = True
 
     except Exception as e:
-        logger.warning(f'[insert_audit_log] {to_str(e)}')
+        logger.warning(f"[insert_audit_log] {to_str(e)}")
 
     finally:
         return log_result

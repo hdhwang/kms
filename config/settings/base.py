@@ -20,7 +20,11 @@ from datetime import timedelta
 def get_server_info_value(key: str):
     result = None
 
-    with open(os.path.abspath(__file__ + '/..') + '/server_info.json', mode='rt', encoding='utf-8') as file:
+    with open(
+        os.path.abspath(__file__ + "/..") + "/server_info.json",
+        mode="rt",
+        encoding="utf-8",
+    ) as file:
         data = json.load(file)
         for k, v in data.items():
             if k == key:
@@ -28,180 +32,177 @@ def get_server_info_value(key: str):
                 break
 
     if not result:
-        raise ValueError('Could not verify server information.')
+        raise ValueError("Could not verify server information.")
 
     return result
 
 
-SETTING_PRD_DIC = get_server_info_value('kms')     # 파일에서 서버 정보 로드(SECRET_KEY, ALLOWED_HOSTS, DATABASES)
+SETTING_PRD_DIC = get_server_info_value(
+    "kms"
+)  # 파일에서 서버 정보 로드(SECRET_KEY, ALLOWED_HOSTS, DATABASES)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SETTING_PRD_DIC['SECRET_KEY']
+SECRET_KEY = SETTING_PRD_DIC["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = SETTING_PRD_DIC['ALLOWED_HOSTS']
+ALLOWED_HOSTS = SETTING_PRD_DIC["ALLOWED_HOSTS"]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'kms',
-    'axes',                     # Axes app can be in any position in the INSTALLED_APPS list.
-    'django_crontab',
-    'rest_framework',
-    'rest_framework.authtoken',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "kms",
+    "axes",  # Axes app can be in any position in the INSTALLED_APPS list.
+    "django_crontab",
+    "rest_framework",
+    "rest_framework.authtoken",
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
     ],
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
     ],
 }
 
 AUTHENTICATION_BACKENDS = [
     # AxesBackend should be the first backend in the AUTHENTICATION_˓→BACKENDS list.
-    'axes.backends.AxesBackend',
+    "axes.backends.AxesBackend",
     # Django ModelBackend is the default authentication backend.
-    'django.contrib.auth.backends.ModelBackend',
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.AxesMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 # DB 접속 정보 복호화 수행
-AES_KEY = SETTING_PRD_DIC['AES_KEY']
-AES_KEY_IV = SETTING_PRD_DIC['AES_KEY_IV']
+AES_KEY = SETTING_PRD_DIC["AES_KEY"]
+AES_KEY_IV = SETTING_PRD_DIC["AES_KEY_IV"]
 
 aes = AESCipher(AES_KEY, AES_KEY_IV)
-SETTING_PRD_DIC['DATABASES']['default']['USER'] = aes.decrypt(SETTING_PRD_DIC['DATABASES']['default']['USER'])
-SETTING_PRD_DIC['DATABASES']['default']['PASSWORD'] = aes.decrypt(SETTING_PRD_DIC['DATABASES']['default']['PASSWORD'])
+SETTING_PRD_DIC["DATABASES"]["default"]["USER"] = aes.decrypt(
+    SETTING_PRD_DIC["DATABASES"]["default"]["USER"]
+)
+SETTING_PRD_DIC["DATABASES"]["default"]["PASSWORD"] = aes.decrypt(
+    SETTING_PRD_DIC["DATABASES"]["default"]["PASSWORD"]
+)
 
 DATABASES = {
-    'default': SETTING_PRD_DIC['DATABASES']['default'],
+    "default": SETTING_PRD_DIC["DATABASES"]["default"],
 }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 LOGGING = {
-    'version': 1,
-    'diable_existing_loggers': False,
-    'formatters': {
-        'default': {
-            'format': '%(asctime)s [%(levelname)8s] %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S'
+    "version": 1,
+    "diable_existing_loggers": False,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s [%(levelname)8s] %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
         },
     },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'default'
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "default",
         },
-        'logfile': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024 * 1024 * 10,   # 로그 파일 당 10M 까지
-            'backupCount': 10,              # 로그 파일을 최대 10개까지 유지
+        "logfile": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "maxBytes": 1024 * 1024 * 10,  # 로그 파일 당 10M 까지
+            "backupCount": 10,  # 로그 파일을 최대 10개까지 유지
             # 'class': 'logging.FileHandler',
-            'filename': os.path.abspath(__file__+'/../../..') + '/logs/django.log',
-            'formatter': 'default'
+            "filename": os.path.abspath(__file__ + "/../../..") + "/logs/django.log",
+            "formatter": "default",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['logfile'],
-            'level': 'INFO',
-            'propagate': False
-        },
-        'kms': {
-            'handlers': ['logfile'],
-            'level': 'INFO',
-            'propagate': False
-        },
-        'axes': {
-            'handlers': ['logfile'],
-            'level': 'WARN',
-            'propagate': False
-        },
-        'django_crontab': {
-            'handlers': ['logfile'],
-            'level': 'INFO',
-            'propagate': False
+    "loggers": {
+        "django": {"handlers": ["logfile"], "level": "INFO", "propagate": False},
+        "kms": {"handlers": ["logfile"], "level": "INFO", "propagate": False},
+        "axes": {"handlers": ["logfile"], "level": "WARN", "propagate": False},
+        "django_crontab": {
+            "handlers": ["logfile"],
+            "level": "INFO",
+            "propagate": False,
         },
     },
 }
 
-CRONTAB_DJANGO_MANAGE_PATH = os.path.abspath(__file__+'/../../..') + '/manage.py'
-CRONTAB_COMMENT = 'kms'
+CRONTAB_DJANGO_MANAGE_PATH = os.path.abspath(__file__ + "/../../..") + "/manage.py"
+CRONTAB_COMMENT = "kms"
 CRONJOBS = [
-    ('0 0 * * *', 'django.core.management.call_command', ['clearsessions']),     # 매 일 0시 만료 세션 정리 수행
-    ('0 0 1 * *', 'kms.cron.log_backup'),                                 # 매 월 1일 0시 로그 백업 수행
-    ('0 0 * * *', 'kms.cron.key_backup'),                                 # 매 일 0시 키 백업 수행
+    (
+        "0 0 * * *",
+        "django.core.management.call_command",
+        ["clearsessions"],
+    ),  # 매 일 0시 만료 세션 정리 수행
+    ("0 0 1 * *", "kms.cron.log_backup"),  # 매 월 1일 0시 로그 백업 수행
+    ("0 0 * * *", "kms.cron.key_backup"),  # 매 일 0시 키 백업 수행
 ]
 
-LANGUAGE_CODE = 'ko-kr'
+LANGUAGE_CODE = "ko-kr"
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -210,24 +211,24 @@ USE_L10N = True
 USE_TZ = False
 
 # 웹페이지에 사용할 정적파일의 최상위 URL 경로
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # 정적파일들이 위치한 경로들을 지정하는 설정 항목
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 # 로그인 필요 시 이동할 페이지 옵션
-LOGIN_URL = '/'
+LOGIN_URL = "/"
 
 # 로그인/로그아웃 후 이동할 페이지 옵션
-LOGIN_REDIRECT_URL = '/kms'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/kms"
+LOGOUT_REDIRECT_URL = "/"
 
 # 세션 타임아웃 값 설정(초)
 SESSION_COOKIE_AGE = 3600
 
 # 세션 쿠키 명 설정 (다른 프로젝트와의 중복 방지를 위함)
-SESSION_COOKIE_NAME = 'kms'
+SESSION_COOKIE_NAME = "kms"
 
 # 사용자가 리퀘스트를 서버로 날릴 때마다 서버의 세션 정보와 클라이언트의 세션 정보를 갱신할 것인지 설정
 # 사용자가 아무런 리퀘스트를 보내지 않는 시간을 세션 타임아웃 시간으로 설정하기 위해 True로 설정
@@ -243,15 +244,15 @@ AXES_COOLOFF_TIME = timedelta(minutes=10)
 AXES_RESET_ON_SUCCESS = True
 
 # 계정 잠금 시 리다이렉션 URL
-AXES_LOCKOUT_URL = '/error-login'
+AXES_LOCKOUT_URL = "/error-login"
 
 # refer to the Django request and response objects documentation
 AXES_META_PRECEDENCE_ORDER = [
-   'HTTP_X_FORWARDED_FOR',
-   'REMOTE_ADDR',
+    "HTTP_X_FORWARDED_FOR",
+    "REMOTE_ADDR",
 ]
 
 SESSION_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

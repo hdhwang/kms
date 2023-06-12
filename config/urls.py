@@ -18,16 +18,16 @@ from django.conf import settings
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('kms.urls')),
-    path('kms/', include('kms.urls')),
+    path("", include("kms.urls")),
+    path("kms/", include("kms.urls")),
 ]
 
 # DEBUG 모드인 경우에만 추가할 URL
 if settings.DEBUG == True:
-    urlpatterns.append(path('admin/', admin.site.urls))
+    urlpatterns.append(path("admin/", admin.site.urls))
 
 # 비정상 HTTP 응답코드 발생 시 리다이렉트
-handler400 = 'kms.views.views.error_400'
-handler403 = 'kms.views.views.error_403'
-handler404 = 'kms.views.views.error_404'
-handler500 = 'kms.views.views.error_500'
+handler400 = "kms.views.views.error_400"
+handler403 = "kms.views.views.error_403"
+handler404 = "kms.views.views.error_404"
+handler500 = "kms.views.views.error_500"
