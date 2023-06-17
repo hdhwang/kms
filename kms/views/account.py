@@ -215,7 +215,7 @@ class UsersAPI(View):
             actions.append(f"[아이디] : {to_str(user.id)}")
 
             # 사용자 그룹 추가
-            group_name = "관리자" if is_superuser == 1 else "사용자"
+            group_name = "Admin" if is_superuser == 1 else "User"
             group = Group.objects.get(name=group_name)
             group.user_set.add(user)
             group.save()

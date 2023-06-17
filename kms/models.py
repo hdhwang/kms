@@ -31,15 +31,15 @@ class IpWhitelist(models.Model):
 
 
 class Keyinfo(models.Model):
-    user = models.OneToOneField(User, models.DO_NOTHING, primary_key=True)
     key = models.CharField(max_length=64)
     value = models.TextField()
     description = models.CharField(max_length=128, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, models.CASCADE)
 
     class Meta:
         db_table = "keyinfo"
-        unique_together = (("user", "key"),)
+        unique_together = (("key", "user"),)
 
 
 class Settings(models.Model):
