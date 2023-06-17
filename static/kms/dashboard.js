@@ -12,7 +12,7 @@ function getKeyInfoCount() {
     axios.get(baseUrl + 'keyinfo').then(function (response) {
         checkRedirectLoginPage(response, $(location).attr('pathname'));  //로그인 페이지 리다이렉트 여부 확인
 
-        if (response.data && response.data.count) {
+        if (response.data && response.data.count >= 0) {
             const count = response.data.count;
             $('.overlay').hide();
             $('#keyinfo').html(numberWithComma(count));
