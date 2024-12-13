@@ -128,11 +128,19 @@ class KMSLogoutView(LogoutView):
         # 로그아웃 감사 로그 기록
         insert_audit_log(user, request, "계정", "로그아웃", "사용자 로그아웃", True)
 
-        next_page = self.get_next_page()
+        next_page = self.get_next_page(request)
         if next_page:
             # Redirect to this page until the session has been cleared.
             return HttpResponseRedirect(next_page)
         return super().dispatch(request, *args, **kwargs)
+
+    def get_next_page(self, request):
+        # LogoutView에서 사용하는 next_page 또는 설정된 URL을 반환
+        next_page = self.next_page or request.POST.get('next') or request.GET.get('next')
+
+        if next_page:
+            return next_page
+        return settings.LOGOUT_REDIRECT_URL or "/"
 
 
 # 로그인 오류 발생 시
