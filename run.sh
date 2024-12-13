@@ -33,7 +33,7 @@ gunicorn config.wsgi:application \
 --pid ${PID_FILE} \
 --access-logfile=${ACCESS_LOG_FILE} \
 --error-logfile=${ERROR_LOG_FILE} \
---timeout {TIMEOUT}
+--timeout ${TIMEOUT}
 --preload \
 --daemon \
 
