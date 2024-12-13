@@ -3,7 +3,7 @@ django-axes==5.35.0
 django-crontab==0.7.1
 djangorestframework==3.15.2
 jsonschema==4.6.2
-mysqlclient==2.1.1
+mysqlclient==2.2.6
 pycryptodome==3.21.0
 requests==2.32.3
 uWSGI==2.0.28
