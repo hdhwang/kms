@@ -13,8 +13,12 @@ WORKERS=3
 THREADS=30
 TIMEOUT=300
 
-if [ ! -d $LOGS_PATH ] ; then
-  mkdir -p $LOGS_PATH
+if [ ! -d ${LOGS_PATH} ] ; then
+  mkdir -p ${LOGS_PATH}
+fi
+
+if [ ! -d ${RUN_PATH} ] ; then
+  mkdir -p ${RUN_PATH}
 fi
 
 if [ -e ${SOCKET_FILE} ]; then
