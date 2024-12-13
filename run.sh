@@ -30,7 +30,7 @@ $SCRIPT_PATH/venv/bin/python3 $SCRIPT_PATH/manage.py crontab add
 
 sleep 3
 
-gunicorn config.wsgi:application \
+gunicorn config.wsgi:application --preload -D \
 --bind unix:${SOCKET_FILE} \
 --workers=${WORKERS} \
 --threads=${THREADS} \
@@ -38,7 +38,5 @@ gunicorn config.wsgi:application \
 --access-logfile=${ACCESS_LOG_FILE} \
 --error-logfile=${ERROR_LOG_FILE} \
 --timeout ${TIMEOUT}
---preload \
---daemon \
 
 deactivate
