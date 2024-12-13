@@ -39,4 +39,6 @@ gunicorn config.wsgi:application --preload -D \
 --error-logfile=${ERROR_LOG_FILE} \
 --timeout ${TIMEOUT}
 
+echo "kms run successfully."
+
 deactivate
