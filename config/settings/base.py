@@ -247,7 +247,7 @@ AXES_RESET_ON_SUCCESS = True
 AXES_LOCKOUT_URL = "/error-login"
 
 # refer to the Django request and response objects documentation
-AXES_META_PRECEDENCE_ORDER = [
+AXES_META_PRIORITY_ORDER = [
     "HTTP_X_FORWARDED_FOR",
     "REMOTE_ADDR",
 ]
