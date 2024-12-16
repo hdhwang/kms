@@ -25,7 +25,6 @@ if [ -e ${SOCKET_FILE} ]; then
     rm -f ${SOCKET_FILE}
 fi
 
-source $SCRIPT_PATH/venv/bin/activate
 $SCRIPT_PATH/venv/bin/python3 $SCRIPT_PATH/manage.py crontab add
 
 sleep 3
@@ -40,5 +39,3 @@ gunicorn config.wsgi:application --preload -D \
 --timeout ${TIMEOUT}
 
 echo "kms run successfully."
-
-deactivate

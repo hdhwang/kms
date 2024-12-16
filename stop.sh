@@ -5,7 +5,6 @@ SCRIPT_PATH=$(dirname $(realpath $0))
 RUN_PATH=${SCRIPT_PATH}/run
 PID_FILE=${RUN_PATH}/kms.pid
 
-source $SCRIPT_PATH/venv/bin/activate
 if [ -f $PID_FILE ]; then
     # PID 파일이 있으면 종료
     kill -9 $(cat $PID_FILE)
@@ -13,4 +12,3 @@ if [ -f $PID_FILE ]; then
     echo "kms stopped successfully."
 fi
 $SCRIPT_PATH/venv/bin/python3 $SCRIPT_PATH/manage.py crontab remove
-deactivate
