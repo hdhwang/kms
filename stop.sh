@@ -11,4 +11,4 @@ if [ -f $PID_FILE ]; then
     rm -f ${PID_FILE}
     echo "kms stopped successfully."
 fi
-$SCRIPT_PATH/venv/bin/python3 $SCRIPT_PATH/manage.py crontab remove
+python3 $SCRIPT_PATH/manage.py crontab remove
