@@ -2,6 +2,7 @@
 /.idea
 /venv
 /.vscode
+.python-version
 
 # Django files #
 *.log
