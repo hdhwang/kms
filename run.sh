@@ -25,7 +25,7 @@ if [ -e ${SOCKET_FILE} ]; then
     rm -f ${SOCKET_FILE}
 fi
 
-$SCRIPT_PATH/venv/bin/python3 $SCRIPT_PATH/manage.py crontab add
+python3 $SCRIPT_PATH/manage.py crontab add
 
 sleep 3
 
