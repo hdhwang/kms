@@ -1,5 +1,10 @@
+import json
+import logging
+from datetime import datetime
+
 from django.contrib import auth
 from django.contrib.auth import password_validation
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
@@ -8,17 +13,14 @@ from django.db.models.functions import Cast, TruncSecond
 from django.http import JsonResponse, HttpResponse
 from django.http.multipartparser import MultiPartParser
 from django.shortcuts import HttpResponseRedirect
-from django.views.generic import TemplateView, View
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import permission_required
+from django.views.generic import TemplateView, View
 from rest_framework.authtoken.models import Token
-from kms.util.logHelper import insert_audit_log
-from kms.util.dicHelper import insert_dic_data, get_dic_value
-from kms.util.mailHelper import *
-from kms.util.regexHelper import *
 
-import json
-import logging
+from utils.dic_helper import insert_dic_data, get_dic_value
+from utils.format_helper import to_int, to_str
+from utils.log_helper import insert_audit_log
+from utils.regex_helper import table_filter_regex, invalid_char_regex
 
 logger = logging.getLogger(__name__)
 
@@ -361,8 +363,8 @@ def get_group_id_by_name(group_name):
     result = None
 
     try:
-        if models.AuthGroup.objects.values().filter(name=group_name):
-            group_obj = models.AuthGroup.objects.get(name=group_name)
+        if Group.objects.values().filter(name=group_name):
+            group_obj = Group.objects.get(name=group_name)
             result = to_int(group_obj.id)
 
     except Exception as e:

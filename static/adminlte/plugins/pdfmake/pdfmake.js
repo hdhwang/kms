@@ -755,7 +755,7 @@ function copyError(source) {
 }
 
 function inspectValue(val) {
-  // The util.inspect default values could be changed. This makes sure the
+  // The utils.inspect default values could be changed. This makes sure the
   // error messages contain the necessary information nevertheless.
   return inspect(val, {
     compact: false,
@@ -1171,7 +1171,7 @@ module.exports = AssertionError;
 
 /* eslint node-core/alphabetize-errors: "error" */
 
-/* eslint node-core/prefer-util-format-errors: "error" */
+/* eslint node-core/prefer-utils-format-errors: "error" */
  // The whole point behind this internal module is to allow Node.js to no
 // longer be forced to treat every error message change as a semver-major
 // change. The NodeError classes here all expose a `code` property whose
@@ -1366,7 +1366,7 @@ module.exports.codes = codes;
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-// Currently in sync with Node.js lib/internal/util/comparisons.js
+// Currently in sync with Node.js lib/internal/utils/comparisons.js
 // https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
 
 
@@ -4055,7 +4055,7 @@ var base64 = __webpack_require__(9742);
 var ieee754 = __webpack_require__(645);
 
 var customInspectSymbol = typeof Symbol === 'function' && typeof Symbol['for'] === 'function' // eslint-disable-line dot-notation
-? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
+? Symbol['for']('nodejs.utils.inspect.custom') // eslint-disable-line dot-notation
 : null;
 exports.Buffer = Buffer;
 exports.SlowBuffer = SlowBuffer;
@@ -49094,7 +49094,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 /***/ (function(module) {
 
 if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
+  // implementation from standard node.js 'utils' module
   module.exports = function inherits(ctor, superCtor) {
     if (superCtor) {
       ctor.super_ = superCtor
@@ -71059,7 +71059,7 @@ module.exports = function isBuffer(arg) {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-// Currently in sync with Node.js lib/internal/util/types.js
+// Currently in sync with Node.js lib/internal/utils/types.js
 // https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
 
 
@@ -71634,7 +71634,7 @@ function formatValue(ctx, value, recurseTimes) {
   if (ctx.customInspect &&
       value &&
       isFunction(value.inspect) &&
-      // Filter out the util module, it's inspect function is special
+      // Filter out the utils module, it's inspect function is special
       value.inspect !== exports.inspect &&
       // Also filter out any prototype objects using the circular check.
       !(value.constructor && value.constructor.prototype === value)) {
@@ -72010,7 +72010,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
+var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('utils.promisify.custom') : undefined;
 
 exports.promisify = function promisify(original) {
   if (typeof original !== 'function')
@@ -72019,7 +72019,7 @@ exports.promisify = function promisify(original) {
   if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
     var fn = original[kCustomPromisifiedSymbol];
     if (typeof fn !== 'function') {
-      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+      throw new TypeError('The "utils.promisify.custom" argument must be of type Function');
     }
     Object.defineProperty(fn, kCustomPromisifiedSymbol, {
       value: fn, enumerable: false, writable: false, configurable: true

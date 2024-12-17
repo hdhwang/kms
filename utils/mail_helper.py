@@ -1,9 +1,10 @@
+import logging
+import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 from kms import models
-from kms.util.formatHelper import *
-import smtplib
-import logging
+from utils.format_helper import to_str
 
 logger = logging.getLogger(__name__)
 

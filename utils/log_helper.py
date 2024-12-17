@@ -1,8 +1,8 @@
-from kms import models
-from django.contrib.auth.models import User
-from kms.util.formatHelper import *
-from kms.util.networkHelper import get_client_ip
 import logging
+
+from kms import models
+from utils.format_helper import ip_to_int, to_str
+from utils.network_helper import get_client_ip
 
 logger = logging.getLogger(__name__)
 

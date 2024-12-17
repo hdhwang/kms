@@ -1,8 +1,9 @@
-from config.settings import DATABASES
-from kms.util.formatHelper import *
 import logging
 import os
 import time
+
+from config.settings.base import DATABASES
+from utils.format_helper import to_str
 
 logger = logging.getLogger(__name__)
 
