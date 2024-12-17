@@ -9,12 +9,11 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-from kms.util.AESHelper import AESCipher
-
-import os
 import json
-import logging
+import os
 from datetime import timedelta
+
+from utils.aes_helper import AESCipher
 
 
 def get_server_info_value(key: str):

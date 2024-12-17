@@ -1,7 +1,8 @@
 from django.utils.translation import gettext_lazy as _
-from kms.util.logHelper import insert_audit_log
 from rest_framework import HTTP_HEADER_ENCODING, exceptions
 from rest_framework.authentication import TokenAuthentication
+
+from utils.log_helper import insert_audit_log
 
 category = "API 요청"
 

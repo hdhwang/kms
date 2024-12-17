@@ -1,10 +1,11 @@
+import logging
+
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import TemplateView, View
-from kms import models
-from kms.util.dicHelper import insert_dic_data
-from kms.util.formatHelper import *
 
-import logging
+from kms import models
+from utils.dic_helper import insert_dic_data
+from utils.format_helper import to_str
 
 logger = logging.getLogger(__name__)
 

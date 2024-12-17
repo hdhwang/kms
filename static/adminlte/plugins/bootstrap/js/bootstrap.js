@@ -66,7 +66,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.6.1): util.js
+   * Bootstrap (v4.6.1): utils.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */

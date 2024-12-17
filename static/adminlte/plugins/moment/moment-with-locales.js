@@ -4905,7 +4905,7 @@
     proto.toISOString = toISOString;
     proto.inspect = inspect;
     if (typeof Symbol !== 'undefined' && Symbol.for != null) {
-        proto[Symbol.for('nodejs.util.inspect.custom')] = function () {
+        proto[Symbol.for('nodejs.utils.inspect.custom')] = function () {
             return 'Moment<' + this.format() + '>';
         };
     }

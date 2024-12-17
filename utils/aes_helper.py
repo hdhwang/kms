@@ -1,8 +1,9 @@
-from Crypto.Cipher import AES
-from kms.util.formatHelper import *
-
 import base64
 import logging
+
+from Crypto.Cipher import AES
+
+from utils.format_helper import to_str
 
 logger = logging.getLogger(__name__)
 

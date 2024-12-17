@@ -1,21 +1,23 @@
+import logging
+from datetime import datetime
+
 from axes.models import AccessAttempt
 from django.conf import settings
 from django.contrib import auth
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LogoutView
 from django.contrib.sessions.models import Session
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import HttpResponseRedirect, render
 from django.views.generic import TemplateView, View
-from kms.util.dicHelper import get_dic_value
-from kms.util.formatHelper import *
-from kms.util.logHelper import insert_audit_log
-from kms.util.networkHelper import get_client_ip
 
-import logging
+from utils.dic_helper import get_dic_value
+from utils.format_helper import to_int, to_str
+from utils.log_helper import insert_audit_log
+from utils.network_helper import get_client_ip
 
 logger = logging.getLogger(__name__)
 

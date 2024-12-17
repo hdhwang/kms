@@ -6,4 +6,5 @@ gunicorn==23.0.0
 jsonschema==4.23.0
 mysqlclient==2.2.6
 pycryptodome==3.21.0
+python-dateutil==2.9.0
 requests==2.32.3
