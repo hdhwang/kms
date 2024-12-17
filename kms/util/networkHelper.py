@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_client_ip(request):
-    if (isinstance(request, wsgi.WSGIRequest) or isinstance(request, asgi.ASGIRequest) or isinstance(request, rest_framework.request.Request)
-    ):
+    if isinstance(request, wsgi.WSGIRequest) or isinstance(request, asgi.ASGIRequest) or isinstance(request, rest_framework.request.Request):
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
 
         if x_forwarded_for:
