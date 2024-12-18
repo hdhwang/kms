@@ -152,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGGING = {
     "version": 1,
-    "diable_existing_loggers": False,
+    "disable_existing_loggers": False,
     "formatters": {
         "default": {
             "format": "%(asctime)s [%(levelname)8s] %(message)s",
