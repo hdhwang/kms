@@ -47,12 +47,15 @@ $ python3 manage.py dumpdata kms -o kms/data_fixture.json --settings=config.sett
 $ python3 manage.py dumpdata auth -o kms/data_auth.json --settings=config.settings.development
 ```
 
-> 데이터베이스 테이블 -> Django 모델 마이그레이션 방법
-
-- 가급적이면 Django 모델 -> 데이터베이스 테이블 마이그레이션 방식을 추천
-- DB에서 테이블을 생성/수정/삭제한 경우 models_tmp.py로 생성 후 models.py에 필요한 class를 추가
-- Django Model에서 관리되기 위해서는 마이그레이션된 코드의 class Meta에서 managed = False 라인 삭제가 필요함
-
+> .env 파일 생성
 ```
-$ python3 manage.py inspectdb > kms/models_tmp.py --settings=config.settings.development
+SECRET_KEY=XXXX
+ALLOWED_HOSTS=XXXX,XXXX,XXXX
+DB_NAME=XXXX
+DB_USER=XXXX
+DB_PASSWORD=XXXX
+DB_HOST=XXXX
+DB_PORT=XXXX
+AES_KEY=XXXX
+AES_KEY_IV=XXXX
 ```

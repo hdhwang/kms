@@ -9,47 +9,33 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-import json
+import environ
 import os
 from datetime import timedelta
-
-from utils.aes_helper import AESCipher
-
-
-def get_server_info_value(key: str):
-    result = None
-
-    with open(
-        os.path.abspath(__file__ + "/..") + "/server_info.json",
-        mode="rt",
-        encoding="utf-8",
-    ) as file:
-        data = json.load(file)
-        for k, v in data.items():
-            if k == key:
-                result = v
-                break
-
-    if not result:
-        raise ValueError("Could not verify server information.")
-
-    return result
-
-
-SETTING_PRD_DIC = get_server_info_value(
-    "kms"
-)  # 파일에서 서버 정보 로드(SECRET_KEY, ALLOWED_HOSTS, DATABASES)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# environ 초기화
+env = environ.Env(
+    DEBUG=(bool, False)  # DEBUG 값을 boolean으로 캐스팅
+)
+
+# .env 파일 로드
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SETTING_PRD_DIC["SECRET_KEY"]
+SECRET_KEY = env("SECRET_KEY")
+
+AES_KEY = env("AES_KEY")
+AES_KEY_IV = env("AES_KEY_IV")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = SETTING_PRD_DIC["ALLOWED_HOSTS"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
 
 # Application definition
 
@@ -118,20 +104,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# DB 접속 정보 복호화 수행
-AES_KEY = SETTING_PRD_DIC["AES_KEY"]
-AES_KEY_IV = SETTING_PRD_DIC["AES_KEY_IV"]
-
-aes = AESCipher(AES_KEY, AES_KEY_IV)
-SETTING_PRD_DIC["DATABASES"]["default"]["USER"] = aes.decrypt(
-    SETTING_PRD_DIC["DATABASES"]["default"]["USER"]
-)
-SETTING_PRD_DIC["DATABASES"]["default"]["PASSWORD"] = aes.decrypt(
-    SETTING_PRD_DIC["DATABASES"]["default"]["PASSWORD"]
-)
-
 DATABASES = {
-    "default": SETTING_PRD_DIC["DATABASES"]["default"],
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
+    }
 }
 
 # Password validation

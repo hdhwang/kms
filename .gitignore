@@ -14,4 +14,4 @@ __pycache__/
  .DS_Store*
 
  # Secret information files #
-config/settings/server_info.json
+.env
