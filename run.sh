@@ -6,9 +6,9 @@ WORKERS=3
 THREADS=30
 TIMEOUT=300
 
-python3 manage.py collectstatic --skip-checks --no-input --clear > /dev/null 2>&1
+python3 $PROJECT_ROOT/manage.py collectstatic --skip-checks --no-input --clear > /dev/null 2>&1
 
-python3 $SCRIPT_PATH/manage.py crontab add
+python3 $PROJECT_ROOT/manage.py crontab add
 
 nginx
 
