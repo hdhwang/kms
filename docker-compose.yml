@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: kms
     ports:
       - "9999:443"
     volumes:
