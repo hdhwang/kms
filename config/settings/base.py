@@ -194,8 +194,8 @@ USE_TZ = False
 STATIC_URL = "/static/"
 
 # 정적파일들이 위치한 경로들을 지정하는 설정 항목
+STATIC_ROOT = '/var/www/html/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 # 로그인 필요 시 이동할 페이지 옵션
 LOGIN_URL = "/"
@@ -235,4 +235,4 @@ AXES_META_PRIORITY_ORDER = [
 SESSION_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = True
 
-DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

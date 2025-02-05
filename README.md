@@ -59,3 +59,9 @@ DB_PORT=XXXX
 AES_KEY=XXXX
 AES_KEY_IV=XXXX
 ```
+
+> 인증서 파일 생성
+```
+cert/cert.pem
+cert/privkey.pem
+```

@@ -1,0 +1,14 @@
+services:
+  kms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9999:443"
+    volumes:
+      - .:/data/app/kms
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+      - PROJECT_ROOT=/data/app/kms
+      - LOG_DIR=/data/app/kms/logs
