@@ -29,10 +29,6 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./cert/cert.pem /etc/cert/cert.pem
 COPY ./cert/privkey.pem /etc/cert/privkey.pem
 
-# 불필요한 파일 삭제
-RUN rm -rf ./.github
-RUN rm -rf ./nginx
-
 # 구동 커맨드 실행
 RUN chmod +x ./run.sh
 CMD ["./run.sh"]
