@@ -10,3 +10,4 @@ services:
       - .:/data/app/kms
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.production
+    restart: always
