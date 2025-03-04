@@ -53,3 +53,45 @@ textarea {
 .brand-link .brand-image {
     margin-right: 10px;
 }
+
+.sidebar-collapse .brand-link .brand-image {
+    margin-left: 20px;
+}
+
+.sidebar-collapse .brand-link .brand-text {
+    display: none;
+}
+
+.small-box, .custom-box {
+    border-radius: 10px;
+}
+
+.bg-custom-1 {
+    background-color: #3f8600 !important;
+    color: white;
+}
+
+.bg-custom-2 {
+    background-color: #CC4525 !important;
+    color: white;
+}
+
+.bg-custom-3 {
+    background-color: #E5AB19 !important;
+    color: white;
+}
+
+.bg-custom-4 {
+    background-color: #346AF3 !important;
+    color: white;
+}
+
+.bg-custom-5 {
+    background-color: #6A0DAD !important;
+    color: white;
+}
+
+.bg-custom-6 {
+    background-color: #800080 !important;
+    color: white;
+}
