@@ -1,3 +1,19 @@
+$(function () {
+    // 페이지 로드 시 로컬 스토리지에서 pushmenu 상태 조회
+    if (localStorage.getItem('pushmenu') == 'collapsed') {
+        $('#main-contents').addClass('sidebar-collapse');
+    }
+});
+
+function changePushMenuStatus() {
+    if ($('#main-contents').hasClass('sidebar-collapse')) {
+        localStorage.removeItem('pushmenu');
+    }
+    else {
+        localStorage.setItem('pushmenu', 'collapsed');
+    }
+}
+
 function confirmLogout() {
     showConfirmModal('확인', '로그아웃하시겠습니까?',
         function (result) {
